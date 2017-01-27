@@ -1,14 +1,19 @@
 {
-  "name": "todos-with-undo",
+  "name": "FlowReact",
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
     "react-scripts": "^0.6.0"
   },
   "dependencies": {
+    "jquery": "^3.1.1",
+    "jquery-ui": "^1.12.1",
+    "jsplumb": "^2.2.10",
+    "material-ui": "^0.16.7",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
     "react-redux": "^4.4.5",
+    "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.5.2",
     "redux-undo": "^1.0.0-beta9"
   },
