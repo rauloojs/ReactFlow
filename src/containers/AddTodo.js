@@ -1,26 +1,26 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { addTodo } from '../actions'
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
 
 let AddTodo = ({ dispatch }) => {
-  let input
+  let textField
 
   return (
     <div>
       <form onSubmit={e => {
         e.preventDefault()
-        if (!input.value.trim()) {
+        if (!textField.input.value.trim()) {
           return
         }
-        dispatch(addTodo(input.value))
-        input.value = ''
+        dispatch(addTodo(textField.input.value))
+        textField.input.value = ''
       }}>
-        <input ref={node => {
-          input = node
+        <TextField hintText="Todo body" ref={node => {
+          textField = node
         }} />
-        <button type="submit">
-          Add Todo
-        </button>
+        <RaisedButton label="Add Todo" type="submit" secondary={true}/>
       </form>
     </div>
   )
