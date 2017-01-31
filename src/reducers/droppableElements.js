@@ -16,6 +16,11 @@ const initialState = [
     id: 3,
     name: 'Conditional',
     type: 'conditional'
+  },
+  {
+    id: 4,
+    name: 'Another one',
+    type: 'another_one'
   }
 ];
 

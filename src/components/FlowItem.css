@@ -1,0 +1,6 @@
+.flow-item {
+  height:80px; width: 80px;
+  border: 1px solid blue;
+  float: left;
+  position: absolute;
+}

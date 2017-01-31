@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import canvasItems from './canvasItems'
 import droppableElements from './droppableElements'
 import todos from './todos'
 import visibilityFilter from './visibilityFilter'
@@ -6,7 +7,8 @@ import visibilityFilter from './visibilityFilter'
 const flowApp = combineReducers({
 	droppableElements,
 	todos,
-	visibilityFilter
+	visibilityFilter,
+	canvasItems
 })
 
 export default flowApp

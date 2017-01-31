@@ -27,7 +27,7 @@ class DroppableElementsList extends Component {
   }
   render() {
     return (
-      <Drawer docked={true}>
+      <Drawer docked={true} open={true}>
         {this.props.droppableElements.map(droppableElement =>
           <div key={droppableElement.id} className='droppable-element' data-shape={droppableElement.type}>
             {droppableElement.name}
