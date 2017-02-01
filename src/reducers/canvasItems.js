@@ -3,19 +3,19 @@ import undoable from 'redux-undo'
 
 const initialState = [
   {
-    id: 1,
+    id: '1',
     name: 'Q1',
     x: 300,
     y: 100
   },
   {
-    id: 2,
+    id: '2',
     name: 'Q2',
     x: 300,
     y: 300
   },
   {
-    id: 3,
+    id: '3',
     name: 'Q3',
     x: 300,
     y: 500
@@ -27,6 +27,11 @@ const canvasItems = (state = initialState, action) => {
     case 'SET_CANVAS_ITEMS':
       return [
         ...state
+      ]
+    case 'ADD_CANVAS_ITEM':
+      return [
+        ...state,
+        Object.assign({}, action.item)
       ]
     default:
       return state

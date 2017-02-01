@@ -1,4 +1,10 @@
 let nextTodoId = 0
+
+export const addCanvasItem = (item) => ({
+  type: 'ADD_CANVAS_ITEM',
+  item: item
+})
+
 export const addTodo = (text) => ({
   type: 'ADD_TODO',
   id: nextTodoId++,
