@@ -1,16 +1,16 @@
-import { connect } from 'react-redux'
-import FlowCanvas from '../components/FlowCanvas'
+import { connect } from 'react-redux';
+import FlowCanvas from '../components/FlowCanvas';
 
-const getItems = (canvasItems) => {
+const getCanvasItems = (canvasItems) => {
   return canvasItems;
-}
+};
 
 const mapStateToProps = (state) => ({
-  canvasItems: getItems(state.canvasItems.present)
-})
+  canvasItems: getCanvasItems(state.canvasItems.present)
+});
 
 const VisibleCanvasItems = connect(
   mapStateToProps
-)(FlowCanvas)
+)(FlowCanvas);
 
-export default VisibleCanvasItems
+export default VisibleCanvasItems;

@@ -1,27 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import './FlowCanvas.css';
-import $ from 'jquery';
-import 'jquery-ui/themes/base/core.css';
-import 'jquery-ui/themes/base/theme.css';
-import 'jquery-ui/ui/core';
-import 'jquery-ui/ui/widgets/droppable';
-
-let style = {
-  width: '100%',
-  height: '100vh'
-};
+import './FlowItem.css';
 
 class FlowCanvas extends Component {
-  componentDidMount() {
-    $('#' + this.props.id).droppable({
-      drop: function(e, ui){
-        var offset = $(this).offset();
-        var droppedElement = ui.helper.clone();
-        ui.helper.remove();
-        // TODO: Add item using action
-      }
-    });
-  }
   render() {
 
     return (

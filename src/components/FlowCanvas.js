@@ -15,8 +15,8 @@ class FlowCanvas extends Component {
   componentDidMount() {
     $('#' + this.props.id).droppable({
       drop: function(e, ui){
-        var offset = $(this).offset();
-        var droppedElement = ui.helper.clone();
+        // var offset = $(this).offset();
+        // var droppedElement = ui.helper.clone();
         ui.helper.remove();
         // TODO: Add item using action
       }
