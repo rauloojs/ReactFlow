@@ -11,10 +11,10 @@ const App = () => (
   <div>
     <Palette />
     <Canvas id={"canvas-id"}/>
-    <AddTodo />
-    <VisibleTodoList />
-    <Footer />
-    <UndoRedo />
+    // <AddTodo />
+    // <VisibleTodoList />
+    // <Footer />
+    // <UndoRedo />
   </div>
 )
 

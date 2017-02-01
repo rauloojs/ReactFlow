@@ -5,6 +5,13 @@ export const addCanvasItem = (item) => ({
   item: item
 })
 
+export const updateCanvasItemPosition = (id, x, y) => ({
+  type: 'UPDATE_CANVAS_ITEM_POSITION',
+  id: id,
+  x: x,
+  y: y
+})
+
 export const addTodo = (text) => ({
   type: 'ADD_TODO',
   id: nextTodoId++,

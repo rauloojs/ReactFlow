@@ -33,6 +33,13 @@ const canvasItems = (state = initialState, action) => {
         ...state,
         Object.assign({}, action.item)
       ]
+    case 'UPDATE_CANVAS_ITEM_POSITION':
+      return state.map(item => item.id === action.id ?
+          // transform the one with a matching id
+          { ...item, x: action.x, y: action.y } :
+          // otherwise return original item
+          item
+        )
     default:
       return state
   }

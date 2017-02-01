@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import FlowItem from './FlowItem';
-import { addCanvasItem } from '../actions';
+import { addCanvasItem, updateCanvasItemPosition } from '../actions';
 import $ from 'jquery';
 import 'jquery-ui/themes/base/core.css';
 import 'jquery-ui/themes/base/theme.css';
 import 'jquery-ui/ui/core';
 import 'jquery-ui/ui/widgets/droppable';
+import jsPlumb from 'jsplumb/dist/js/jsplumb'
 const uuidV4 = require('uuid/v4');
 
 let style = {
@@ -20,18 +21,48 @@ class FlowCanvas extends Component {
     $('#' + this.props.id).droppable({
       drop: function(e, ui){
         var droppedElement = ui.helper.clone();
-        var newPosX = ui.offset.left;
-        var newPosY = ui.offset.top;
-        ui.helper.remove();
-        // TODO: Add item using action
-        dispatch(addCanvasItem({
-          id: uuidV4(),
-          x: newPosX,
-          y: newPosY,
-          name: 'hello'
-        }))
 
-        
+        switch(droppedElement[0].dataset.shape) {
+          case 'question':
+          case 'action':
+            var newPosX = ui.offset.left;
+            var newPosY = ui.offset.top;
+            ui.helper.remove();
+            // TODO: Add item using action
+            let uuid = uuidV4();
+            dispatch(addCanvasItem({
+              id: uuid,
+              x: newPosX,
+              y: newPosY,
+              name: 'hello'
+            }))
+
+            jsPlumb.draggable($('.flow-item'), {
+              handle: '.drag-handler',
+              stop: function (e) {
+                let something = dispatch(updateCanvasItemPosition(uuid, e.pos[0], e.pos[1]))
+                console.log(something);
+              },
+              containment: true
+            });
+            jsPlumb.addEndpoint('flow-item-' + uuid, {
+                endpoint: "Dot",
+                isSource: true,
+                isTarget: true,
+                anchor: [ "TopCenter" ],
+                connectorStyle: { strokeWidth:4, stroke:'blue' }
+            });
+            jsPlumb.addEndpoint('flow-item-' + uuid, {
+                endpoint: "Dot",
+                isSource: true,
+                isTarget: true,
+                anchor: [ "BottomCenter" ],
+                connectorStyle: { strokeWidth:4, stroke:'blue' }
+            });
+            break;
+          default:
+            break;
+        }
       }
     });
   }
