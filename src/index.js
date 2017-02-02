@@ -6,9 +6,19 @@ import App from './components/App'
 import reducer from './reducers'
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { loadState, saveState } from './utils/localStorage'
 
+const persistedStore = loadState();
+const store = createStore(
+  reducer,
+  persistedStore
+);
 
-const store = createStore(reducer)
+store.subscribe(() => {
+  saveState({
+    canvasItems: store.getState().canvasItems
+  });
+});
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
