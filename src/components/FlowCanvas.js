@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import FlowItem from './FlowItem';
-import { addCanvasItem } from '../actions';
+import { addCanvasItem, setCanvasDialogOpen } from '../actions';
 import $ from 'jquery';
 import 'jquery-ui/themes/base/core.css';
 import 'jquery-ui/themes/base/theme.css';
@@ -8,6 +8,8 @@ import 'jquery-ui/ui/core';
 import 'jquery-ui/ui/widgets/droppable';
 const uuidV4 = require('uuid/v4');
 import FloatingActionButton from 'material-ui/FloatingActionButton';
+import FlatButton from 'material-ui/FlatButton';
+import Dialog from 'material-ui/Dialog';
 import ContentAdd from 'material-ui/svg-icons/content/save';
 import jsPlumb from 'jsplumb/dist/js/jsplumb';
 
@@ -37,6 +39,17 @@ const fabStyle = {
 
 
 class FlowCanvas extends Component {
+  openDialogHandler() {
+    console.log('Hi');
+    this.props.dispatch(setCanvasDialogOpen(true));
+  }
+  handleOpen = () => {
+    this.props.dispatch(setCanvasDialogOpen(true))
+  };
+
+  handleClose = () => {
+    this.props.dispatch(setCanvasDialogOpen(false))
+  };
   componentWillUnmount() {
     // TODO: Shoud I unbind jquery stuff?
   }
@@ -72,14 +85,36 @@ class FlowCanvas extends Component {
     jsPlumb.setContainer(this.props.id);
   }
   render() {
+    const actions = [
+      <FlatButton
+        label="Cancel"
+        primary={true}
+        onTouchTap={this.handleClose}
+      />,
+      <FlatButton
+        label="Submit"
+        primary={true}
+        keyboardFocused={true}
+        onTouchTap={this.handleClose}
+      />,
+    ];
 
     return (
       <div style={canvasContainerStyle}>
         <div id={this.props.id} style={Object.assign({}, canvasStyle, {transform: 'scale('+ this.props.canvasUi.zoom +')'})}>
           {this.props.canvasItems.map(item =>
-            <FlowItem key={item.id} item={item}/>
+            <FlowItem key={item.id} item={item} openDialogHandler={this.openDialogHandler.bind(this)}/>
           )}
         </div>
+        <Dialog
+          title="Dialog With Actions"
+          actions={actions}
+          modal={false}
+          open={this.props.canvasUi.dialogOpen}
+          onRequestClose={this.handleClose}
+        >
+          The actions in this window were passed in as an array of React objects.
+        </Dialog>
         <FloatingActionButton style={fabStyle}>
           <ContentAdd />
         </FloatingActionButton>

@@ -13,6 +13,9 @@ class FlowItem extends Component {
     // TODO Repaint is not working
     jsPlumb.repaint('#flow-item-' + this.props.item.id);
   }
+  handleActionClick() {
+    this.props.openDialogHandler();
+  }
   componentDidMount() {
     let id = 'flow-item-'+ this.props.item.id;
     let component = this;
@@ -60,7 +63,7 @@ class FlowItem extends Component {
           />
           <CardActions>
             <div className='drag-handler' />
-            <FlatButton label="Action1" />
+            <FlatButton label="Action1" onClick={this.handleActionClick.bind(this)}/>
             <FlatButton label="Action2" />
           </CardActions>
           <CardText expandable={true}>
@@ -82,7 +85,8 @@ FlowItem.propTypes = {
     y: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired
-  }).isRequired
+  }).isRequired,
+  openDialogHandler: PropTypes.func.isRequired
 };
 
 

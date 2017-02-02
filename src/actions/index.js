@@ -17,6 +17,10 @@ export const setCanvasZoom = (zoom) => ({
   zoom
 })
 
+export const setCanvasDialogOpen = (dialogOpen) => ({
+  type: 'SET_CANVAS_DIALOG_OPEN',
+  dialogOpen
+})
 
 export const addTodo = (text) => ({
   type: 'ADD_TODO',
