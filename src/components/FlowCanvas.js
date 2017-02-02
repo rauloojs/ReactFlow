@@ -12,8 +12,8 @@ import ContentAdd from 'material-ui/svg-icons/content/save';
 import jsPlumb from 'jsplumb/dist/js/jsplumb';
 
 const canvasStyle = {
-  width: '2000px',
-  height: '2000px',
+  width: '3000px',
+  height: '3000px',
   transformOrigin: "0 0",
   position: "absolute",
   background: '#eee'
@@ -34,6 +34,7 @@ const fabStyle = {
     left: 'auto',
     position: 'fixed',
 };
+
 
 class FlowCanvas extends Component {
   componentWillUnmount() {
@@ -74,7 +75,7 @@ class FlowCanvas extends Component {
 
     return (
       <div style={canvasContainerStyle}>
-        <div id={this.props.id} style={canvasStyle}>
+        <div id={this.props.id} style={Object.assign({}, canvasStyle, {transform: 'scale('+ this.props.canvasUi.zoom*0.01 +')'})}>
           {this.props.canvasItems.map(item =>
             <FlowItem key={item.id} item={item}/>
           )}

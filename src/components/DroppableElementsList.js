@@ -1,13 +1,19 @@
 import React, { Component, PropTypes } from 'react';
 import $ from 'jquery';
 import Drawer from 'material-ui/Drawer';
+import Slider from 'material-ui/Slider';
 import './DroppableElementsList.css';
 import 'jquery-ui/themes/base/core.css';
 import 'jquery-ui/themes/base/theme.css';
 import 'jquery-ui/themes/base/draggable.css';
 import 'jquery-ui/ui/core';
 import 'jquery-ui/ui/widgets/draggable';
+import { setCanvasZoom } from '../actions';
 
+const sliderStyle = {
+  maxWidth: 200,
+  marginLeft: 10
+};
 
 class DroppableElementsList extends Component {
   componentDidMount() {
@@ -25,6 +31,9 @@ class DroppableElementsList extends Component {
       }
     });
   }
+  handleZoomChange(component, value) {
+    this.props.dispatch(setCanvasZoom(value));
+  }
   render() {
     return (
       <Drawer docked={true} open={true}>
@@ -33,6 +42,7 @@ class DroppableElementsList extends Component {
             {droppableElement.name}
           </div>
         )}
+        <Slider step={10} value={100} min={50} max={100} style={sliderStyle} onChange={this.handleZoomChange.bind(this)} />
       </Drawer>
     );
   }
