@@ -38,7 +38,7 @@ class DroppableElementsList extends Component {
     return (
       <Drawer docked={true} open={true}>
         {this.props.droppableElements.map(droppableElement =>
-          <div key={droppableElement.id} className='droppable-element' data-shape={droppableElement.type}>
+          <div key={droppableElement.id} className='droppable-element' data-shape={droppableElement.type} data-default-name={droppableElement.defaultName}>
             {droppableElement.name}
           </div>
         )}
@@ -52,6 +52,7 @@ DroppableElementsList.propTypes = {
   droppableElements: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
+    defaultName: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired
   }).isRequired).isRequired
 }

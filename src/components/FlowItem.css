@@ -10,3 +10,7 @@
   width: 20px;
   background: black;
 }
+
+.jtk-endpoint svg circle{
+  r: 8;
+}

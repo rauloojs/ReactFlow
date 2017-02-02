@@ -40,16 +40,14 @@ const fabStyle = {
 
 class FlowCanvas extends Component {
   openDialogHandler() {
-    console.log('Hi');
     this.props.dispatch(setCanvasDialogOpen(true));
   }
   handleOpen = () => {
     this.props.dispatch(setCanvasDialogOpen(true))
-  };
-
+  }
   handleClose = () => {
     this.props.dispatch(setCanvasDialogOpen(false))
-  };
+  }
   componentWillUnmount() {
     // TODO: Shoud I unbind jquery stuff?
   }
@@ -61,6 +59,7 @@ class FlowCanvas extends Component {
       drop: function(e, ui){
         let droppedElement = ui.helper.clone();
         let shape = droppedElement[0].dataset.shape;
+        let name = droppedElement[0].dataset.defaultName;
 
         switch (shape) {
           case 'question':
@@ -74,7 +73,7 @@ class FlowCanvas extends Component {
               x: newPosX,
               y: newPosY,
               type: shape,
-              name: 'hello'
+              name: name
             }))
             break;
           default:
