@@ -9,10 +9,21 @@ import 'jquery-ui/ui/widgets/droppable';
 const uuidV4 = require('uuid/v4');
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/save';
+import jsPlumb from 'jsplumb/dist/js/jsplumb';
 
-const style = {
-  width: '100%',
-  height: '100vh'
+const canvasStyle = {
+  width: '2000px',
+  height: '2000px',
+  transformOrigin: "0 0",
+  position: "absolute",
+  background: '#eee'
+};
+
+const canvasContainerStyle = {
+  width: '100wh',
+  height: '100vh',
+  marginLeft: "256px",
+  overflow: "auto"
 };
 
 const fabStyle = {
@@ -39,7 +50,7 @@ class FlowCanvas extends Component {
         switch (shape) {
           case 'question':
           case 'action':
-            var newPosX = ui.offset.left;
+            var newPosX = ui.offset.left - 256;
             var newPosY = ui.offset.top;
             ui.helper.remove();
             let uuid = uuidV4();
@@ -56,12 +67,14 @@ class FlowCanvas extends Component {
         }
       }
     });
+    console.log(this.props.id);
+    jsPlumb.setContainer(this.props.id);
   }
   render() {
 
     return (
-      <div>
-        <div id={this.props.id} style={style}>
+      <div style={canvasContainerStyle}>
+        <div id={this.props.id} style={canvasStyle}>
           {this.props.canvasItems.map(item =>
             <FlowItem key={item.id} item={item}/>
           )}

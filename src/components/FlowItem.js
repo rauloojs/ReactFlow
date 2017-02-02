@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import './FlowItem.css';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
-import jsPlumb from 'jsplumb/dist/js/jsplumb'
+import jsPlumb from 'jsplumb/dist/js/jsplumb';
 import $ from 'jquery';
 import { updateCanvasItemPosition } from '../actions';
 const uuidV4 = require('uuid/v4');
@@ -27,19 +27,22 @@ class FlowItem extends Component {
       });
       jsPlumb.addEndpoint(id, {
           uuid: uuidV4(),
+          connector: [ "Bezier", { curviness:160 } ],
           endpoint: "Dot",
           isSource: false,
           isTarget: true,
           anchor: [ "TopCenter" ],
-          connectorStyle: { strokeWidth:4, stroke:'blue' }
+          connectorStyle: { strokeWidth:2, stroke:'#444' },
+          maxConnections: -1
       });
       jsPlumb.addEndpoint(id, {
           uuid: uuidV4(),
+          connector: [ "Bezier", { curviness:160 } ],
           endpoint: "Dot",
           isSource: true,
           isTarget: false,
           anchor: [ "BottomCenter" ],
-          connectorStyle: { strokeWidth:4, stroke:'blue' }
+          connectorStyle: { strokeWidth:2, stroke:'#444' }
       });
     });
   }

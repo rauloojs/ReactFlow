@@ -6,7 +6,8 @@ import App from './components/App'
 import reducer from './reducers'
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { loadState, saveState } from './utils/localStorage'
+import { loadState, saveState } from './utils/localStorage';
+import './index.css'
 
 const persistedStore = loadState();
 const store = createStore(
