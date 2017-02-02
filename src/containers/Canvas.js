@@ -7,7 +7,7 @@ const getCanvasItems = (canvasItems) => {
 };
 
 const getCanvasUi = (canvasUi) => {
-  jsPlumb.setZoom(canvasUi.zoom * 0.01);
+  jsPlumb.setZoom(canvasUi.zoom);
 
   return canvasUi;
 }

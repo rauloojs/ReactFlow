@@ -1,5 +1,5 @@
 const initialState = {
-  zoom: 100
+  zoom: 1
 };
 
 const canvasUi = (state = initialState, action) => {

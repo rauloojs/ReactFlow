@@ -42,6 +42,7 @@ class FlowCanvas extends Component {
   }
   componentDidMount() {
     let dispatch = this.props.dispatch;
+    let component = this;
 
     $('#' + this.props.id).droppable({
       drop: function(e, ui){
@@ -51,8 +52,8 @@ class FlowCanvas extends Component {
         switch (shape) {
           case 'question':
           case 'action':
-            var newPosX = ui.offset.left - 256;
-            var newPosY = ui.offset.top;
+            var newPosX = (ui.offset.left - 256) / (component.props.canvasUi.zoom);
+            var newPosY = ui.offset.top / (component.props.canvasUi.zoom);
             ui.helper.remove();
             let uuid = uuidV4();
             dispatch(addCanvasItem({
@@ -68,14 +69,13 @@ class FlowCanvas extends Component {
         }
       }
     });
-    console.log(this.props.id);
     jsPlumb.setContainer(this.props.id);
   }
   render() {
 
     return (
       <div style={canvasContainerStyle}>
-        <div id={this.props.id} style={Object.assign({}, canvasStyle, {transform: 'scale('+ this.props.canvasUi.zoom*0.01 +')'})}>
+        <div id={this.props.id} style={Object.assign({}, canvasStyle, {transform: 'scale('+ this.props.canvasUi.zoom +')'})}>
           {this.props.canvasItems.map(item =>
             <FlowItem key={item.id} item={item}/>
           )}

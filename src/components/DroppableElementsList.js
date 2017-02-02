@@ -42,7 +42,7 @@ class DroppableElementsList extends Component {
             {droppableElement.name}
           </div>
         )}
-        <Slider step={10} value={100} min={50} max={100} style={sliderStyle} onChange={this.handleZoomChange.bind(this)} />
+        <Slider step={0.1} value={1} min={0.5} max={1} style={sliderStyle} onChange={this.handleZoomChange.bind(this)} />
       </Drawer>
     );
   }
