@@ -12,6 +12,12 @@ export const updateCanvasItemPosition = (id, x, y) => ({
   y
 })
 
+export const updateCanvasItemNext = (id, next) => ({
+  type: 'UPDATE_CANVAS_ITEM_NEXT',
+  id,
+  next
+})
+
 export const setCanvasZoom = (zoom) => ({
   type: 'SET_CANVAS_ZOOM',
   zoom

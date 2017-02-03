@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import FlowItem from './FlowItem';
-import { addCanvasItem, setCanvasDialogOpen } from '../actions';
+import { addCanvasItem, setCanvasDialogOpen, updateCanvasItemNext } from '../actions';
 import $ from 'jquery';
 import 'jquery-ui/themes/base/core.css';
 import 'jquery-ui/themes/base/theme.css';
@@ -35,6 +35,10 @@ const fabStyle = {
     bottom: 20,
     left: 'auto',
     position: 'fixed',
+};
+
+const getUUIDFromItemId = (id) => {
+  return id.split('flow-item-').pop();
 };
 
 
@@ -82,6 +86,11 @@ class FlowCanvas extends Component {
       }
     });
     jsPlumb.setContainer(this.props.id);
+    jsPlumb.bind('connection', function(info) {
+      let id = getUUIDFromItemId(info.sourceId);
+      let next = getUUIDFromItemId(info.targetId);
+      component.props.dispatch(updateCanvasItemNext(id, next));
+    });
   }
   render() {
     const actions = [
@@ -128,7 +137,8 @@ FlowCanvas.propTypes = {
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired
+    type: PropTypes.string.isRequired,
+    next: PropTypes.string
   }).isRequired).isRequired,
   id: PropTypes.string.isRequired
 }

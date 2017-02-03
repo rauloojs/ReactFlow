@@ -5,7 +5,6 @@ import FlatButton from 'material-ui/FlatButton';
 import jsPlumb from 'jsplumb/dist/js/jsplumb';
 import $ from 'jquery';
 import { updateCanvasItemPosition } from '../actions';
-const uuidV4 = require('uuid/v4');
 import { connect } from 'react-redux';
 
 class FlowItem extends Component {
@@ -29,7 +28,7 @@ class FlowItem extends Component {
         containment: true
       });
       jsPlumb.addEndpoint(id, {
-          uuid: uuidV4(),
+          uuid: id + '-top',
           connector: [ "Bezier", { curviness:160 } ],
           endpoint: "Dot",
           isSource: false,
@@ -39,7 +38,7 @@ class FlowItem extends Component {
           maxConnections: -1
       });
       jsPlumb.addEndpoint(id, {
-          uuid: uuidV4(),
+          uuid: id + '-bottom',
           connector: [ "Bezier", { curviness:160 } ],
           endpoint: "Dot",
           isSource: true,
@@ -47,6 +46,20 @@ class FlowItem extends Component {
           anchor: [ "BottomCenter" ],
           connectorStyle: { strokeWidth:2, stroke:'#444' }
       });
+
+      setTimeout(function () {
+        if (component.props.item.next) {
+          let target = 'flow-item-' + component.props.item.next;
+          jsPlumb.connect({
+            source: id,
+            target: target,
+            anchors:["Bottom", "Top"],
+            connector: [ "Bezier", { curviness:160 } ],
+            paintStyle: { strokeWidth:2, stroke:'#444' }
+          });
+        }
+      }, 1000);
+
     });
   }
   render() {

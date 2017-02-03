@@ -43,6 +43,13 @@ const canvasItems = (state = initialState, action) => {
           // otherwise return original item
           item
         )
+    case 'UPDATE_CANVAS_ITEM_NEXT':
+      return state.map(item => item.id === action.id ?
+          // transform the one with a matching id
+          { ...item, next: action.next } :
+          // otherwise return original item
+          item
+        )
     default:
       return state
   }
